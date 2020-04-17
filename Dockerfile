@@ -12,4 +12,4 @@ RUN qmake Jamulus.pro && \
     
 EXPOSE 22124/udp
     
-CMD ["./Jamulus", "-s", "-n"]
+CMD ["./Jamulus", "-s", "-n", "-F"]
