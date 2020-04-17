@@ -4,9 +4,9 @@ WORKDIR /srv/src
 COPY . /srv/src/
 
 RUN apt-get update && \
-    apt-get install -y build-essential libqt4-dev libjack-jackd2-dev
+    apt-get install -y build-essential libqt4-dev
     
-RUN qmake Jamulus.pro && \
+RUN qmake "CONFIG+=nosound" Jamulus.pro && \
     make clean && \
     make
     
