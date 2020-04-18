@@ -1,15 +1,24 @@
-FROM ubuntu:18.04
+FROM alpine:3.9 as build
 
-WORKDIR /srv/src
-COPY . /srv/src/
+RUN apk update
 
-RUN apt-get update && \
-    apt-get install -y build-essential libqt4-dev
-    
+RUN apk add --no-cache build-base qt-dev
+
+WORKDIR /tmp/build
+COPY . /tmp/build
+
 RUN qmake "CONFIG+=nosound" Jamulus.pro && \
     make clean && \
     make
-    
+
+FROM alpine:3.9
+
+RUN apk update
+
+RUN apk add --no-cache qt-x11 icu-libs
+
+COPY --from=build /tmp/build/Jamulus /usr/local/bin/Jamulus
+
 EXPOSE 22124/udp
-    
-CMD ["./Jamulus", "-s", "-n", "-F"]
+
+ENTRYPOINT ["Jamulus", "--server", "--nogui", "--fastupdate"]
