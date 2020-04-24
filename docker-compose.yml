@@ -8,4 +8,4 @@ services:
     restart: on-failure
     volumes:
       - ~/recordings:/recordings
-    command: -R /recordings
+    command: --recording /recordings
