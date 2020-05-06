@@ -21,4 +21,4 @@ COPY --from=build /tmp/build/Jamulus /usr/local/bin/Jamulus
 
 EXPOSE 22124/udp
 
-ENTRYPOINT ["Jamulus", "--server", "--nogui", "--fastupdate"]
+ENTRYPOINT ["Jamulus", "--server", "--nogui", "--fastupdate", "--numchannels", "20"]
